@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async';
 import { useState } from 'react';
 import Hello from './Hello'
 import Login from './Login'
@@ -7,9 +8,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-      isLoggedIn
-      ?  <Hello/>
-      : <Login/>
+    <HelmetProvider>
+      {
+        isLoggedIn
+        ?  <Hello/>
+        : <Login/>
+      }
+    </HelmetProvider>
   )
 }
 
