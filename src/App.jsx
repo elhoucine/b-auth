@@ -12,7 +12,7 @@ function App() {
       {
         isLoggedIn
         ?  <Hello/>
-        : <Login/>
+        : <Login onLogin={setIsLoggedIn}/>
       }
     </HelmetProvider>
   )
