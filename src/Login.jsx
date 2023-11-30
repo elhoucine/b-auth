@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { ToastContainer, toast } from 'react-toastify';
 import Webcam from "react-webcam";
 import 'react-toastify/dist/ReactToastify.css';
@@ -86,10 +85,6 @@ function Login({ onLogin }) {
 
   return (
     <>
-      <Helmet>
-        <title>Login page!</title>
-        <meta name='description' content={ERROR_MSG} />
-      </Helmet>
       <h1>CAMERA</h1>
       {isCameraOn
         ? <Webcam ref={webcamRef}/>
