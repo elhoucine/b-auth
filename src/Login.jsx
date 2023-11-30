@@ -9,13 +9,26 @@ const TACKINGJS_CDN = `${CDN_BASE_URL}/tracking.js/1.1.3/tracking-min.js`;
 const FACEJS_CDN = `${CDN_BASE_URL}/tracking.js/1.1.3/data/face-min.js`;
 const LOGIN_DELAY_SECONDS = 10;
 const SUCCESS_MSG = 'Login success, redirecting to hello page!';
-const ERROR_MSG = 'Login failed, no face detected.';
+const ERROR_LOGIN_MSG = 'Login failed, no face detected.';
+const ERROR_CAMERA_PERMISSION = 'Camera permission denied.';
 
 function Login({ onLogin }) {
   let tracker;
   const webcamRef = useRef(null);
   const [isFaceCaptured, setIsFaceCaptured] = useState(false);
   const [isCameraOn, setIsCameraOn] = useState(true);
+
+  useEffect(() => {
+    const getCameraPermission = async () => {
+      try {
+        await navigator.mediaDevices.getUserMedia({ video: true });
+      } catch (error) {
+        toast.error(ERROR_CAMERA_PERMISSION);
+      }
+    };
+
+    getCameraPermission();
+  }, []);
 
   useEffect(() => {
     // using a node_module would have been easier,
@@ -79,7 +92,7 @@ function Login({ onLogin }) {
       if (!isFaceCaptured) {
         tracker?.removeAllListeners?.();
         setIsCameraOn(false);
-        toast.error(ERROR_MSG);
+        toast.error(ERROR_LOGIN_MSG);
       }
     }, LOGIN_DELAY_SECONDS * 1000)
   }
