@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import Hello from './Hello'
 import Login from './Login'
 import './App.css'
@@ -13,6 +14,7 @@ function App() {
         ?  <Hello/>
         : <Login onLogin={setIsLoggedIn}/>
       }
+      <ToastContainer />
     </>
   )
 }
