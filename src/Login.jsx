@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import Webcam from "react-webcam";
+import logo from "./assets/logo.svg";
 import 'react-toastify/dist/ReactToastify.css';
 
 const CDN_BASE_URL = 'https://cdnjs.cloudflare.com/ajax/libs';
 const TACKINGJS_CDN = `${CDN_BASE_URL}/tracking.js/1.1.3/tracking-min.js`;
 const FACEJS_CDN = `${CDN_BASE_URL}/tracking.js/1.1.3/data/face-min.js`;
 const LOGIN_DELAY_SECONDS = 10;
-const SUCCESS_MSG = 'You are being redirected to hello page!';
-const ERROR_MSG = 'You are about to login biometrically.';
+const SUCCESS_MSG = 'Login success, redirecting to hello page!';
+const ERROR_MSG = 'Login failed, no face detected.';
 
 function Login({ onLogin }) {
   let tracker;
@@ -78,14 +79,17 @@ function Login({ onLogin }) {
       if (!isFaceCaptured) {
         tracker?.removeAllListeners?.();
         setIsCameraOn(false);
-        toast.error("Login failed!");
+        toast.error(ERROR_MSG);
       }
     }, LOGIN_DELAY_SECONDS * 1000)
   }
 
   return (
     <>
-      <h1>CAMERA</h1>
+      <div style={{ marginBottom: "20px" }}>
+      <span style={{ marginRight: "10px" }}>Face login by</span>
+        <img style={{ width: "100px" }} src={logo} alt="" />
+      </div>
       {isCameraOn
         ? <Webcam ref={webcamRef}/>
         : <button onClick={handleOnRetry}>Re-try</button>
