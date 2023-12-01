@@ -49,8 +49,6 @@ Given the non-requirement for unit testing in this challenge, I focused on featu
 - Handling login success.
 - Handling login failure.
 
-## Architectural Decisions
-
 ## What Could I Have Done with More Time
 
 Depending on the provided requirements, additional elements could be considered:
@@ -64,6 +62,12 @@ Depending on the provided requirements, additional elements could be considered:
 - Improved user experience:
     - Visual feedback (success/failure) on the Camera frame.
     - Highlighting face parts as they are being detected.
+- Handle more use cases:
+    - Camera permission neither given or denied.
+    - Check for supported devices.
+    - Accessibility:
+      - Add sound to guide users with vision difficulties.
+      - Check and adjust colors.
 - Consideration of GDPR alignment.
 
 ## Splitting Work into Reviewable Sub-Tasks in a Real-World Environment
